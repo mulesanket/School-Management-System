@@ -1,10 +1,14 @@
 import React from "react";
 import { Layout, Card, Button, Row, Col, Typography } from "antd";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import SchoolLoginPage from "./features/school/SchoolLoginPage";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
 
-const App: React.FC = () => {
+const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout style={{ minHeight: "100vh", background: "#f5f5f5" }}>
       {/* Top Bar */}
@@ -47,7 +51,11 @@ const App: React.FC = () => {
                 <Paragraph type="secondary" style={{ fontSize: 13 }}>
                   For school admins & staff.
                 </Paragraph>
-                <Button type="primary" block>
+                <Button
+                  type="primary"
+                  block
+                  onClick={() => navigate("/school/login")}
+                >
                   Go to School Portal
                 </Button>
               </Card>
@@ -70,7 +78,9 @@ const App: React.FC = () => {
                 <Paragraph type="secondary" style={{ fontSize: 13 }}>
                   For parents to stay connected.
                 </Paragraph>
-                <Button block>Go to Parent Portal</Button>
+                <Button block onClick={() => alert("Parent login coming soon")}>
+                  Go to Parent Portal
+                </Button>
               </Card>
             </Col>
 
@@ -91,7 +101,9 @@ const App: React.FC = () => {
                 <Paragraph type="secondary" style={{ fontSize: 13 }}>
                   For students to access learning.
                 </Paragraph>
-                <Button block>Go to Pupil Portal</Button>
+                <Button block onClick={() => alert("Pupil login coming soon")}>
+                  Go to Pupil Portal
+                </Button>
               </Card>
             </Col>
           </Row>
@@ -102,6 +114,16 @@ const App: React.FC = () => {
         © {new Date().getFullYear()} School Management System
       </Footer>
     </Layout>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/school/login" element={<SchoolLoginPage />} />
+      {/* Later: add /parent/login and /pupil/login here */}
+    </Routes>
   );
 };
 
