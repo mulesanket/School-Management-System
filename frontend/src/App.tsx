@@ -1,39 +1,5 @@
-/*
-SchoolSpider Frontend - Starter HomePage (React + TypeScript)
-
-This single-file example is a ready-to-drop-in React component that demonstrates:
-- Layout with Sidebar + Topbar
-- Dashboard/Home page with cards similar to your screenshots
-- Uses Ant Design components for quick UI parity
-- Client-side routing shell (React Router)
-
--------------------------------------------------
-Quick setup (run in terminal):
-1) Create project (Vite + React + TS)
-   npm create vite@latest schoolspider-frontend -- --template react-ts
-   cd schoolspider-frontend
-
-2) Install deps
-   npm install antd react-router-dom@6 @tanstack/react-query axios
-
-3) Replace src/App.tsx with this file's contents (or import the component)
-   Ensure src/main.tsx mounts <App /> wrapped with BrowserRouter and QueryClientProvider.
-
-4) Start dev server
-   npm run dev
-
--------------------------------------------------
-What this file contains (single-file demo):
-- Sidebar component with nav items
-- Topbar with search and profile circle
-- HomePage: grid of subscription cards and small stat cards
-- Minimal CSS via inline styles and Ant Design layout
-
-Note: This is a focused UI starter for the HOME page only. Use this as a reference when building other pages.
-*/
-
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Layout, Menu, Input, Avatar, Badge, Card, Row, Col, Button } from 'antd';
 import {
   HomeOutlined,
@@ -179,9 +145,5 @@ const AppShell: React.FC = () => {
 };
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <AppShell />
-    </BrowserRouter>
-  );
+  return <AppShell />;
 }
