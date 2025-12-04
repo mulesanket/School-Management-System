@@ -122,7 +122,7 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/school/login" element={<SchoolLoginPage />} />
-      {/* Later: add /parent/login and /pupil/login here */}
+      {/* later: /parent/login and /pupil/login routes */}
     </Routes>
   );
 };
