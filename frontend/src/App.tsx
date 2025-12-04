@@ -37,7 +37,7 @@ const App: React.FC = () => {
                 style={{ borderRadius: 12 }}
                 cover={
                   <img
-                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"
+                    src="/images/school.jpg"
                     alt="School"
                     style={{ height: 150, objectFit: "cover" }}
                   />
@@ -60,7 +60,7 @@ const App: React.FC = () => {
                 style={{ borderRadius: 12 }}
                 cover={
                   <img
-                    src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=900&q=80"
+                    src="/images/parents.jpg"
                     alt="Parents"
                     style={{ height: 150, objectFit: "cover" }}
                   />
@@ -81,7 +81,7 @@ const App: React.FC = () => {
                 style={{ borderRadius: 12 }}
                 cover={
                   <img
-                    src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80"
+                    src="/images/pupil.jpg"
                     alt="Pupil"
                     style={{ height: 150, objectFit: "cover" }}
                   />
