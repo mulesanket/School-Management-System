@@ -1,9 +1,18 @@
 import React from "react";
 import { Card, Form, Input, Button, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 const SchoolLoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleFinish = (values: any) => {
+    // later we'll call backend here
+    console.log("School login form submitted:", values);
+    navigate("/school/dashboard");
+  };
+
   return (
     <div
       style={{
@@ -29,12 +38,12 @@ const SchoolLoginPage: React.FC = () => {
           Admin & staff access to the school portal
         </Text>
 
-        <Form layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Email">
+        <Form layout="vertical" style={{ marginTop: 24 }} onFinish={handleFinish}>
+          <Form.Item label="Email" name="email">
             <Input placeholder="admin@school.com" />
           </Form.Item>
 
-          <Form.Item label="Password">
+          <Form.Item label="Password" name="password">
             <Input.Password placeholder="••••••••" />
           </Form.Item>
 

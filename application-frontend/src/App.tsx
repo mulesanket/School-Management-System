@@ -5,6 +5,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import SchoolLoginPage from "./features/school/SchoolLoginPage";
 import ParentLoginPage from "./features/parents/ParentLoginPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
+import SchoolDashboardPage from "./features/school/SchoolDashboardPage";
+
 
 
 const { Header, Content, Footer } = Layout;
@@ -128,8 +130,10 @@ const App: React.FC = () => {
       <Route path="/school/login" element={<SchoolLoginPage />} />
       <Route path="/parent/login" element={<ParentLoginPage />} />
       <Route path="/pupil/login" element={<PupilLoginPage />} />
+      <Route path="/school/dashboard" element={<SchoolDashboardPage />} />
     </Routes>
   );
 };
+
 
 export default App;
