@@ -1,149 +1,136 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import { Layout, Menu, Input, Avatar, Badge, Card, Row, Col, Button } from 'antd';
-import {
-  HomeOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  UserOutlined,
-  SettingOutlined,
-  MailOutlined,
-  BellOutlined,
-} from '@ant-design/icons';
+import React from "react";
+import { Layout, Card, Button, Row, Col, Typography } from "antd";
 
-const { Header, Sider, Content } = Layout;
-const { Search } = Input;
+const { Header, Content, Footer } = Layout;
+const { Title, Paragraph, Text } = Typography;
 
-const Sidebar: React.FC = () => {
+const App: React.FC = () => {
   return (
-    <Sider width={240} style={{ minHeight: '100vh', background: '#0d3943' }}>
-      <div style={{ padding: 20, color: 'white', fontWeight: 700, fontSize: 18 }}>
-        <img src="https://via.placeholder.com/36" alt="logo" style={{ marginRight: 8, verticalAlign: 'middle' }} />
-        <span style={{ verticalAlign: 'middle' }}>SchoolSpider</span>
-      </div>
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        style={{ background: 'transparent', borderRight: 'none' }}
+    <Layout style={{ minHeight: "100vh", background: "#f5f7fb" }}>
+      {/* Top bar */}
+      <Header
+        style={{
+          background: "#0d3943",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 32px",
+        }}
       >
-        <Menu.Item key="1" icon={<HomeOutlined />}>
-          <Link to="/">Home</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<AppstoreOutlined />}>
-          Website Area
-        </Menu.Item>
-        <Menu.Item key="3" icon={<TeamOutlined />}>Parents Area</Menu.Item>
-        <Menu.Item key="4" icon={<UserOutlined />}>Pupil Area</Menu.Item>
-        <Menu.Item key="5" icon={<MailOutlined />}>Payments</Menu.Item>
-        <Menu.Item key="6" icon={<SettingOutlined />}>Settings</Menu.Item>
-      </Menu>
-    </Sider>
-  );
-};
-
-const Topbar: React.FC = () => {
-  return (
-    <Header style={{ background: '#fff', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
-      <Search placeholder="Search parents, pupils and staff" style={{ width: 420 }} />
-      <div style={{ flex: 1 }} />
-      <Button type="text" icon={<BellOutlined />} />
-      <Badge dot>
-        <Button type="text" icon={<MailOutlined />} />
-      </Badge>
-      <Avatar style={{ backgroundColor: '#87d068' }}>SM</Avatar>
-    </Header>
-  );
-};
-
-const SubscriptionCard: React.FC<{ title: string; tag?: string }> = ({ title, tag }) => (
-  <Card bordered style={{ borderRadius: 8 }}>
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div>
-        <div style={{ fontWeight: 700 }}>{title}</div>
-        <div style={{ color: '#6b7280', marginTop: 6 }}>Included in your package for FREE!</div>
-        <div style={{ marginTop: 10 }}>
-          <Button type="primary" size="small">Show me how this works</Button>
+        <div
+          style={{
+            color: "white",
+            fontSize: 20,
+            fontWeight: 700,
+            letterSpacing: 0.5,
+          }}
+        >
+          School Management Portal
         </div>
-      </div>
-      <div>
-        <div style={{ background: '#06b6d4', color: 'white', padding: '6px 10px', borderRadius: 20 }}>{tag ?? 'INCLUDED'}</div>
-      </div>
-    </div>
-  </Card>
-);
+      </Header>
 
-const StatCard: React.FC<{ title: string; value: React.ReactNode }> = ({ title, value }) => (
-  <Card bordered style={{ borderRadius: 8 }}>
-    <div style={{ fontSize: 12, color: '#6b7280' }}>{title}</div>
-    <div style={{ fontSize: 22, fontWeight: 700, marginTop: 10 }}>{value}</div>
-    <div style={{ marginTop: 12 }}><a>View all →</a></div>
-  </Card>
-);
+      {/* Main content */}
+      <Content style={{ padding: "40px 24px" }}>
+        <div
+          style={{
+            maxWidth: 1000,
+            margin: "0 auto",
+          }}
+        >
+          {/* Hero text */}
+          <div style={{ marginBottom: 32 }}>
+            <Title level={2} style={{ marginBottom: 8 }}>
+              Welcome to the School Management System
+            </Title>
+            <Paragraph type="secondary" style={{ maxWidth: 700 }}>
+              A central portal for schools, parents and pupils to manage
+              communication, payments and learning — all in one place.
+            </Paragraph>
+          </div>
 
-const HomePage: React.FC = () => {
-  return (
-    <div style={{ padding: 24 }}>
-      <h2>Your Subscription Usage <span style={{ fontSize: 12, color: '#6b7280' }}>Using 0%</span></h2>
+          {/* 3 login cards */}
+          <Row gutter={[24, 24]}>
+            {/* School Login */}
+            <Col xs={24} md={8}>
+              <Card
+                title="School Login"
+                bordered
+                style={{ borderRadius: 12, height: "100%" }}
+                headStyle={{ fontWeight: 600 }}
+              >
+                <Paragraph type="secondary">
+                  For school admins and staff to manage website content, parents,
+                  pupils and payments.
+                </Paragraph>
+                <Button
+                  type="primary"
+                  block
+                  onClick={() => alert("School login will go here later")}
+                >
+                  Go to School Login
+                </Button>
+              </Card>
+            </Col>
 
-      <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="School Website Manager" /></Col>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="Parent Communications" /></Col>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="Parents Evenings" /></Col>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="Parent Surveys" /></Col>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="Parent Payments" /></Col>
-        <Col xs={24} sm={12} lg={8}><SubscriptionCard title="Translations" tag="Add" /></Col>
-      </Row>
+            {/* Parent Login */}
+            <Col xs={24} md={8}>
+              <Card
+                title="Parent Login"
+                bordered
+                style={{ borderRadius: 12, height: "100%" }}
+                headStyle={{ fontWeight: 600 }}
+              >
+                <Paragraph type="secondary">
+                  For parents to view messages, book parents evenings, complete
+                  surveys and make payments.
+                </Paragraph>
+                <Button
+                  block
+                  onClick={() => alert("Parent login will go here later")}
+                >
+                  Go to Parent Login
+                </Button>
+              </Card>
+            </Col>
 
-      <div style={{ height: 20 }} />
+            {/* Pupil Login */}
+            <Col xs={24} md={8}>
+              <Card
+                title="Pupil Login"
+                bordered
+                style={{ borderRadius: 12, height: "100%" }}
+                headStyle={{ fontWeight: 600 }}
+              >
+                <Paragraph type="secondary">
+                  For pupils to access homework, class updates and
+                  pupil-specific information.
+                </Paragraph>
+                <Button
+                  block
+                  onClick={() => alert("Pupil login will go here later")}
+                >
+                  Go to Pupil Login
+                </Button>
+              </Card>
+            </Col>
+          </Row>
 
-      <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} md={6}><StatCard title="Unprocessed Items" value={0} /></Col>
-        <Col xs={24} sm={12} md={6}><StatCard title="Unprocessed Items Total" value={'£0.00'} /></Col>
-        <Col xs={24} sm={12} md={6}><StatCard title="Unprocessed Clubs/Lunches" value={0} /></Col>
-        <Col xs={24} sm={12} md={6}><StatCard title="Unprocessed Vouchers" value={0} /></Col>
-      </Row>
+          {/* Small helper text */}
+          <div style={{ marginTop: 32 }}>
+            <Text type="secondary">
+              Later we will link each button to its own login page and role-based
+              dashboard (school, parent, pupil).
+            </Text>
+          </div>
+        </div>
+      </Content>
 
-      <div style={{ height: 24 }} />
-
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card title="Text Message Credits Used" style={{ borderRadius: 8, minHeight: 200 }}>
-            <div style={{ color: '#9ca3af' }}>Chart placeholder</div>
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Parent Messaging" style={{ borderRadius: 8, minHeight: 200 }}>
-            <ul>
-              <li>holiday — 25</li>
-              <li>Test — 25</li>
-              <li>Testing123 — 2</li>
-            </ul>
-            <div style={{ marginTop: 12 }}><Button type="primary">Send Message</Button></div>
-          </Card>
-        </Col>
-      </Row>
-    </div>
-  );
-};
-
-const AppShell: React.FC = () => {
-  return (
-    <Layout>
-      <Sidebar />
-      <Layout>
-        <Topbar />
-        <Content style={{ background: '#f6f7fb', minHeight: 'calc(100vh - 64px)' }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<div style={{ padding: 24 }}>Page not found</div>} />
-          </Routes>
-        </Content>
-      </Layout>
+      <Footer style={{ textAlign: "center", background: "#f5f7fb" }}>
+        <Text type="secondary">
+          © {new Date().getFullYear()} School Management System
+        </Text>
+      </Footer>
     </Layout>
   );
 };
 
-export default function App() {
-  return <AppShell />;
-}
+export default App;
