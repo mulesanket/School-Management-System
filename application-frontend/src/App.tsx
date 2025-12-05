@@ -7,6 +7,8 @@ import ParentsListPage from "./features/school/ParentsListPage";
 import ParentLoginPage from "./features/parents/ParentLoginPage";
 import ParentRegisterPage from "./features/parents/ParentRegisterPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
+import PupilRegisterPage from "./features/pupils/PupilRegisterPage";
+
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -140,6 +142,7 @@ const App: React.FC = () => {
       <Route path="/parent/register" element={<ParentRegisterPage />} />
 
       <Route path="/pupil/login" element={<PupilLoginPage />} />
+      <Route path="/pupil/register" element={<PupilRegisterPage />} />
     </Routes>
   );
 };

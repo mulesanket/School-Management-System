@@ -1,12 +1,16 @@
 import React from "react";
 import { Card, Form, Input, Button, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 const PupilLoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleFinish = (values: any) => {
     console.log("Pupil login submitted:", values);
-    // later: call backend for pupil auth
+    // Later: call backend /api/auth/pupil/login here
+    // and on success redirect to a pupil dashboard like /pupil/dashboard
   };
 
   return (
@@ -34,7 +38,11 @@ const PupilLoginPage: React.FC = () => {
           Access homework, announcements and resources.
         </Text>
 
-        <Form layout="vertical" style={{ marginTop: 24 }} onFinish={handleFinish}>
+        <Form
+          layout="vertical"
+          style={{ marginTop: 24 }}
+          onFinish={handleFinish}
+        >
           <Form.Item
             label="Username"
             name="username"
@@ -57,6 +65,30 @@ const PupilLoginPage: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+
+        <div
+          style={{
+            marginTop: 12,
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 12,
+          }}
+        >
+          <Button
+            type="link"
+            style={{ padding: 0 }}
+            onClick={() => navigate("/pupil/register")}
+          >
+            Create an account
+          </Button>
+          <Button
+            type="link"
+            style={{ padding: 0 }}
+            onClick={() => alert("Forgot password flow will be added later")}
+          >
+            Forgot password?
+          </Button>
+        </div>
       </Card>
     </div>
   );
