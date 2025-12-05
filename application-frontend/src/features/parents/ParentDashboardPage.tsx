@@ -132,7 +132,7 @@ const ParentDashboardPage: React.FC = () => {
               >
                 <List
                   dataSource={recentAnnouncements}
-                  renderItem={(item, index) => (
+                  renderItem={(item) => (
                     <List.Item>
                       <Text>{item}</Text>
                     </List.Item>
