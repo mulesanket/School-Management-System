@@ -5,6 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -16,8 +17,10 @@
     <artifactId>parent-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>parent-service</name>
+    <description>Parent service for login & registration</description>
 
     <properties>
+        <!-- We are using JDK 17 -->
         <java.version>17</java.version>
     </properties>
 
@@ -29,7 +32,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Validation -->
+        <!-- Validation (for @NotBlank, @Email, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -41,7 +44,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- PostgreSQL driver (for later) -->
+        <!-- PostgreSQL driver (for later when we connect to AWS DB) -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -58,17 +61,7 @@
 
     <build>
         <plugins>
-            <!-- Force Java 21 for compilation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <release>17</release>
-                </configuration>
-            </plugin>
-
-            <!-- Spring Boot plugin -->
+            <!-- Only Spring Boot plugin, compiler config will be inherited from parent -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
