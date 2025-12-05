@@ -3,7 +3,6 @@ import { Layout, Card, Button, Row, Col, Typography } from "antd";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import SchoolLoginPage from "./features/school/SchoolLoginPage";
 import SchoolDashboardPage from "./features/school/SchoolDashboardPage";
-import ParentsListPage from "./features/school/ParentsListPage";
 import ParentLoginPage from "./features/parents/ParentLoginPage";
 import ParentRegisterPage from "./features/parents/ParentRegisterPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
@@ -138,7 +137,6 @@ const App: React.FC = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/school/login" element={<SchoolLoginPage />} />
       <Route path="/school/dashboard" element={<SchoolDashboardPage />} />
-      <Route path="/school/parents" element={<ParentsListPage />} />
 
       <Route path="/parent/login" element={<ParentLoginPage />} />
       <Route path="/parent/register" element={<ParentRegisterPage />} />
