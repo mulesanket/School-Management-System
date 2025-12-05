@@ -4,6 +4,11 @@ import { Card, Form, Input, Button, Typography } from "antd";
 const { Title, Text } = Typography;
 
 const PupilLoginPage: React.FC = () => {
+  const handleFinish = (values: any) => {
+    console.log("Pupil login submitted:", values);
+    // later: call backend for pupil auth
+  };
+
   return (
     <div
       style={{
@@ -19,7 +24,7 @@ const PupilLoginPage: React.FC = () => {
         style={{
           width: 380,
           borderRadius: 12,
-          boxShadow: "0 10px 30px rgba(15,23,42,0.15)",
+          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.15)",
         }}
       >
         <Title level={4} style={{ marginBottom: 8 }}>
@@ -29,12 +34,20 @@ const PupilLoginPage: React.FC = () => {
           Access homework, announcements and resources.
         </Text>
 
-        <Form layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Username">
+        <Form layout="vertical" style={{ marginTop: 24 }} onFinish={handleFinish}>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: "Please enter your username" }]}
+          >
             <Input placeholder="pupil username" />
           </Form.Item>
 
-          <Form.Item label="Password">
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please enter your password" }]}
+          >
             <Input.Password placeholder="••••••••" />
           </Form.Item>
 

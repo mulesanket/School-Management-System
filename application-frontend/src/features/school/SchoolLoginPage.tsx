@@ -8,9 +8,9 @@ const SchoolLoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleFinish = (values: any) => {
-    // later we'll call backend here
     console.log("School login form submitted:", values);
-    navigate("/school/dashboard");
+    // Later: call backend, and on success:
+    navigate("/school/dashboard", { replace: true });
   };
 
   return (
@@ -28,7 +28,7 @@ const SchoolLoginPage: React.FC = () => {
         style={{
           width: 380,
           borderRadius: 12,
-          boxShadow: "0 10px 30px rgba(15,23,42,0.15)",
+          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.15)",
         }}
       >
         <Title level={4} style={{ marginBottom: 8 }}>

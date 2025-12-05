@@ -57,8 +57,8 @@ const ParentsListPage: React.FC = () => {
         <span>School – Parents</span>
         <Button
           type="default"
-          onClick={() => navigate("/school/dashboard")}
           size="small"
+          onClick={() => navigate("/school/dashboard")}
         >
           Back to Dashboard
         </Button>
@@ -70,35 +70,26 @@ const ParentsListPage: React.FC = () => {
             Parents
           </Title>
           <Text type="secondary">
-            This is a static list for now. Later we will replace it with data from
-            a Spring Boot service.
+            This is a static list for now. Later we will replace it with data
+            from a Spring Boot service.
           </Text>
 
-          <div style={{ marginTop: 20, background: "white", padding: 16, borderRadius: 8 }}>
+          <div
+            style={{
+              marginTop: 20,
+              background: "white",
+              padding: 16,
+              borderRadius: 8,
+            }}
+          >
             <Table
               dataSource={mockParents}
               pagination={{ pageSize: 5 }}
               columns={[
-                {
-                  title: "Parent Name",
-                  dataIndex: "name",
-                  key: "name",
-                },
-                {
-                  title: "Email",
-                  dataIndex: "email",
-                  key: "email",
-                },
-                {
-                  title: "Pupil",
-                  dataIndex: "pupilName",
-                  key: "pupilName",
-                },
-                {
-                  title: "Status",
-                  dataIndex: "status",
-                  key: "status",
-                },
+                { title: "Parent Name", dataIndex: "name", key: "name" },
+                { title: "Email", dataIndex: "email", key: "email" },
+                { title: "Pupil", dataIndex: "pupilName", key: "pupilName" },
+                { title: "Status", dataIndex: "status", key: "status" },
               ]}
             />
           </div>

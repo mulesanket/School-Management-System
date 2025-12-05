@@ -9,8 +9,8 @@ const ParentLoginPage: React.FC = () => {
 
   const handleFinish = (values: any) => {
     console.log("Parent login submitted:", values);
-    // later: call backend /api/auth/parent/login here
-    // on success: navigate("/parent/dashboard")
+    // Later we will call backend /api/auth/parent/login here
+    // and on success redirect to a parent dashboard.
   };
 
   return (
@@ -28,7 +28,7 @@ const ParentLoginPage: React.FC = () => {
         style={{
           width: 380,
           borderRadius: 12,
-          boxShadow: "0 10px 30px rgba(15,23,42,0.15)",
+          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.15)",
         }}
       >
         <Title level={4} style={{ marginBottom: 8 }}>
@@ -87,7 +87,7 @@ const ParentLoginPage: React.FC = () => {
           <Button
             type="link"
             style={{ padding: 0 }}
-            onClick={() => alert("Forgot password flow will come later")}
+            onClick={() => alert("Forgot password flow will be added later")}
           >
             Forgot password?
           </Button>

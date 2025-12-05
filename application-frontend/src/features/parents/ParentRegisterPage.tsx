@@ -10,9 +10,10 @@ const ParentRegisterPage: React.FC = () => {
 
   const handleFinish = (values: any) => {
     console.log("Parent registration submitted:", values);
-    // later: call backend /api/auth/parent/register here
-    // on success: navigate("/parent/login")
-    navigate("/parent/login");
+    // Later we will call backend /api/auth/parent/register here.
+    // After successful registration, go to login and replace history
+    // so that pressing Back does NOT return to the registration page.
+    navigate("/parent/login", { replace: true });
   };
 
   return (
@@ -30,7 +31,7 @@ const ParentRegisterPage: React.FC = () => {
         style={{
           width: 420,
           borderRadius: 12,
-          boxShadow: "0 10px 30px rgba(15,23,42,0.15)",
+          boxShadow: "0 10px 30px rgba(15, 23, 42, 0.15)",
         }}
       >
         <Title level={4} style={{ marginBottom: 8 }}>
@@ -67,7 +68,9 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Mobile Number"
             name="phone"
-            rules={[{ required: true, message: "Please enter your mobile number" }]}
+            rules={[
+              { required: true, message: "Please enter your mobile number" },
+            ]}
           >
             <Input placeholder="+91-9876543210" />
           </Form.Item>
@@ -75,7 +78,9 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Pupil Name"
             name="pupilName"
-            rules={[{ required: true, message: "Please enter your child's name" }]}
+            rules={[
+              { required: true, message: "Please enter your child's name" },
+            ]}
           >
             <Input placeholder="Oliver Smith" />
           </Form.Item>

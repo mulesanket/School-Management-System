@@ -1,17 +1,12 @@
 import React from "react";
 import { Layout, Card, Button, Row, Col, Typography } from "antd";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
 import SchoolLoginPage from "./features/school/SchoolLoginPage";
-import ParentLoginPage from "./features/parents/ParentLoginPage";
-import PupilLoginPage from "./features/pupils/PupilLoginPage";
 import SchoolDashboardPage from "./features/school/SchoolDashboardPage";
 import ParentsListPage from "./features/school/ParentsListPage";
+import ParentLoginPage from "./features/parents/ParentLoginPage";
 import ParentRegisterPage from "./features/parents/ParentRegisterPage";
-
-
-
-
+import PupilLoginPage from "./features/pupils/PupilLoginPage";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -88,7 +83,10 @@ const HomePage: React.FC = () => {
                 <Paragraph type="secondary" style={{ fontSize: 13 }}>
                   For parents to stay connected.
                 </Paragraph>
-                <Button block onClick={() => navigate("/parent/login")}>
+                <Button
+                  block
+                  onClick={() => navigate("/parent/login")}
+                >
                   Go to Parent Portal
                 </Button>
               </Card>
@@ -111,7 +109,10 @@ const HomePage: React.FC = () => {
                 <Paragraph type="secondary" style={{ fontSize: 13 }}>
                   For students to access learning.
                 </Paragraph>
-                <Button block onClick={() => navigate("/pupil/login")}>
+                <Button
+                  block
+                  onClick={() => navigate("/pupil/login")}
+                >
                   Go to Pupil Portal
                 </Button>
               </Card>
@@ -132,11 +133,13 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/school/login" element={<SchoolLoginPage />} />
-      <Route path="/parent/login" element={<ParentLoginPage />} />
-      <Route path="/parent/register" element={<ParentRegisterPage />} />
-      <Route path="/pupil/login" element={<PupilLoginPage />} />
       <Route path="/school/dashboard" element={<SchoolDashboardPage />} />
       <Route path="/school/parents" element={<ParentsListPage />} />
+
+      <Route path="/parent/login" element={<ParentLoginPage />} />
+      <Route path="/parent/register" element={<ParentRegisterPage />} />
+
+      <Route path="/pupil/login" element={<PupilLoginPage />} />
     </Routes>
   );
 };
