@@ -1,4 +1,4 @@
-package com.schoolspider;
+package com.schoolspider.parent;
 
 /**
  * Hello world!
