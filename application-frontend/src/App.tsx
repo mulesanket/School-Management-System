@@ -7,6 +7,8 @@ import ParentLoginPage from "./features/parents/ParentLoginPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
 import SchoolDashboardPage from "./features/school/SchoolDashboardPage";
 import ParentsListPage from "./features/school/ParentsListPage";
+import ParentRegisterPage from "./features/parents/ParentRegisterPage";
+
 
 
 
@@ -131,6 +133,7 @@ const App: React.FC = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/school/login" element={<SchoolLoginPage />} />
       <Route path="/parent/login" element={<ParentLoginPage />} />
+      <Route path="/parent/register" element={<ParentRegisterPage />} />
       <Route path="/pupil/login" element={<PupilLoginPage />} />
       <Route path="/school/dashboard" element={<SchoolDashboardPage />} />
       <Route path="/school/parents" element={<ParentsListPage />} />

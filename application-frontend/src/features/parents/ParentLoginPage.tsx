@@ -1,9 +1,18 @@
 import React from "react";
 import { Card, Form, Input, Button, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 const ParentLoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleFinish = (values: any) => {
+    console.log("Parent login submitted:", values);
+    // later: call backend /api/auth/parent/login here
+    // on success: navigate("/parent/dashboard")
+  };
+
   return (
     <div
       style={{
@@ -29,12 +38,27 @@ const ParentLoginPage: React.FC = () => {
           Access your child's updates, messages and payments.
         </Text>
 
-        <Form layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Email">
+        <Form
+          layout="vertical"
+          style={{ marginTop: 24 }}
+          onFinish={handleFinish}
+        >
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: "Please enter your email" },
+              { type: "email", message: "Please enter a valid email" },
+            ]}
+          >
             <Input placeholder="parent@example.com" />
           </Form.Item>
 
-          <Form.Item label="Password">
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please enter your password" }]}
+          >
             <Input.Password placeholder="••••••••" />
           </Form.Item>
 
@@ -44,6 +68,30 @@ const ParentLoginPage: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+
+        <div
+          style={{
+            marginTop: 12,
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 12,
+          }}
+        >
+          <Button
+            type="link"
+            style={{ padding: 0 }}
+            onClick={() => navigate("/parent/register")}
+          >
+            Create an account
+          </Button>
+          <Button
+            type="link"
+            style={{ padding: 0 }}
+            onClick={() => alert("Forgot password flow will come later")}
+          >
+            Forgot password?
+          </Button>
+        </div>
       </Card>
     </div>
   );
