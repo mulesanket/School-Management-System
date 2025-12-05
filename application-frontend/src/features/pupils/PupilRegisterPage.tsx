@@ -135,13 +135,14 @@ const PupilRegisterPage: React.FC = () => {
             fontSize: 12,
           }}
         >
-          <Button
-            type="link"
-            style={{ padding: 0 }}
-            onClick={() => navigate("/pupil/login")}
-          >
-            Back to login
-          </Button>
+<Button
+  type="link"
+  style={{ padding: 0 }}
+  onClick={() => navigate("/pupil/login", { replace: true })} 
+>
+  Back to login
+</Button>
+
         </div>
       </Card>
     </div>

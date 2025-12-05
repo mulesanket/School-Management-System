@@ -143,12 +143,13 @@ const ParentRegisterPage: React.FC = () => {
           }}
         >
           <Button
-            type="link"
-            style={{ padding: 0 }}
-            onClick={() => navigate("/parent/login")}
-          >
-            Back to login
-          </Button>
+  type="link"
+  style={{ padding: 0 }}
+  onClick={() => navigate("/parent/login", { replace: true })} 
+>
+  Back to login
+</Button>
+
         </div>
       </Card>
     </div>
