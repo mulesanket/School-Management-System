@@ -1,10 +1,13 @@
 import React from "react";
-import { Layout, Card, Row, Col, Typography } from "antd";
+import { Layout, Card, Row, Col, Typography, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
 
 const SchoolDashboardPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout style={{ minHeight: "100vh", background: "#f5f5f5" }}>
       <Header
@@ -36,8 +39,15 @@ const SchoolDashboardPage: React.FC = () => {
               <Card style={{ borderRadius: 10 }}>
                 <Text type="secondary">Total Parents</Text>
                 <Title level={3} style={{ marginTop: 8 }}>
-                  0
+                  3
                 </Title>
+                <Button
+                  type="link"
+                  style={{ padding: 0, marginTop: 8 }}
+                  onClick={() => navigate("/school/parents")}
+                >
+                  View parents
+                </Button>
               </Card>
             </Col>
             <Col xs={24} md={8}>

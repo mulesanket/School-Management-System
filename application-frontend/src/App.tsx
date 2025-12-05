@@ -6,6 +6,8 @@ import SchoolLoginPage from "./features/school/SchoolLoginPage";
 import ParentLoginPage from "./features/parents/ParentLoginPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
 import SchoolDashboardPage from "./features/school/SchoolDashboardPage";
+import ParentsListPage from "./features/school/ParentsListPage";
+
 
 
 
@@ -131,9 +133,9 @@ const App: React.FC = () => {
       <Route path="/parent/login" element={<ParentLoginPage />} />
       <Route path="/pupil/login" element={<PupilLoginPage />} />
       <Route path="/school/dashboard" element={<SchoolDashboardPage />} />
+      <Route path="/school/parents" element={<ParentsListPage />} />
     </Routes>
   );
 };
-
 
 export default App;
