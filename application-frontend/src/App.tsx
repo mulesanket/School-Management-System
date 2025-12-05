@@ -8,6 +8,7 @@ import ParentLoginPage from "./features/parents/ParentLoginPage";
 import ParentRegisterPage from "./features/parents/ParentRegisterPage";
 import PupilLoginPage from "./features/pupils/PupilLoginPage";
 import PupilRegisterPage from "./features/pupils/PupilRegisterPage";
+import ParentDashboardPage from "./features/parents/ParentDashboardPage"; 
 
 
 const { Header, Content, Footer } = Layout;
@@ -130,6 +131,7 @@ const HomePage: React.FC = () => {
   );
 };
 
+
 const App: React.FC = () => {
   return (
     <Routes>
@@ -140,6 +142,7 @@ const App: React.FC = () => {
 
       <Route path="/parent/login" element={<ParentLoginPage />} />
       <Route path="/parent/register" element={<ParentRegisterPage />} />
+      <Route path="/parent/dashboard" element={<ParentDashboardPage />} /> {/* NEW */}
 
       <Route path="/pupil/login" element={<PupilLoginPage />} />
       <Route path="/pupil/register" element={<PupilRegisterPage />} />

@@ -10,7 +10,8 @@ const ParentLoginPage: React.FC = () => {
   const handleFinish = (values: any) => {
     console.log("Parent login submitted:", values);
     // Later we will call backend /api/auth/parent/login here
-    // and on success redirect to a parent dashboard.
+    // For now, assume success and go to parent dashboard.
+    navigate("/parent/dashboard", { replace: true });
   };
 
   return (
