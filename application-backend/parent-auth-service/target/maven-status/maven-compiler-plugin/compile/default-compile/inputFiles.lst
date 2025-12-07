@@ -1,5 +1,6 @@
 /home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/ParentAuthServiceApplication.java
-/home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/config/SecurityConfig.java
+/home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/auth/AuthController.java
+/home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/auth/LoginRequest.java
 /home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/parent/Parent.java
 /home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/parent/ParentAuthController.java
 /home/ubuntu/School-Management-System/application-backend/parent-auth-service/src/main/java/com/school/management/parentauth/parent/ParentRegistrationRequest.java

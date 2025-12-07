@@ -1,17 +1,60 @@
-import React from "react";
-import { Card, Form, Input, Button, Typography } from "antd";
+import React, { useState } from "react";
+import { Card, Form, Input, Button, Typography, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8081";
+
+interface ParentLoginFormValues {
+  email: string;
+  password: string;
+}
+
 const ParentLoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleFinish = (values: any) => {
-    console.log("Parent login submitted:", values);
-    // Later we will call backend /api/auth/parent/login here
-    // For now, assume success and go to parent dashboard.
-    navigate("/parent/dashboard", { replace: true });
+  const handleFinish = async (values: ParentLoginFormValues) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/auth/parent/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        // store minimal info in localStorage for now
+        localStorage.setItem(
+          "parentUser",
+          JSON.stringify({
+            parentId: data.parentId,
+            fullName: data.fullName,
+            email: data.email,
+          })
+        );
+        message.success("Login successful!");
+        navigate("/parent/dashboard", { replace: true });
+      } else if (response.status === 401) {
+        const text = await response.text();
+        message.error(text || "Invalid email or password");
+      } else {
+        const text = await response.text();
+        message.error(text || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      message.error("Unable to reach server. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,7 +107,7 @@ const ParentLoginPage: React.FC = () => {
           </Form.Item>
 
           <Form.Item style={{ marginTop: 8 }}>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={loading}>
               Sign in
             </Button>
           </Form.Item>
@@ -88,7 +131,9 @@ const ParentLoginPage: React.FC = () => {
           <Button
             type="link"
             style={{ padding: 0 }}
-            onClick={() => alert("Forgot password flow will be added later")}
+            onClick={() =>
+              alert("Forgot password flow will be added later")
+            }
           >
             Forgot password?
           </Button>
@@ -99,3 +144,4 @@ const ParentLoginPage: React.FC = () => {
 };
 
 export default ParentLoginPage;
+

@@ -1,7 +1,8 @@
 com/school/management/parentauth/parent/ParentAuthController.class
 com/school/management/parentauth/parent/ParentRegistrationRequest.class
-com/school/management/parentauth/config/SecurityConfig.class
+com/school/management/parentauth/auth/AuthController.class
 com/school/management/parentauth/ParentAuthServiceApplication.class
 com/school/management/parentauth/parent/Parent.class
+com/school/management/parentauth/auth/LoginRequest.class
 com/school/management/parentauth/parent/ParentService.class
 com/school/management/parentauth/parent/ParentRepository.class

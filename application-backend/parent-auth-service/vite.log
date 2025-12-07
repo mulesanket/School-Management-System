@@ -6,4 +6,4 @@ npm error errno -2
 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/ubuntu/School-Management-System/application-backend/parent-auth-service/package.json'
 npm error enoent This is related to npm not being able to find a file.
 npm error enoent
-npm error A complete log of this run can be found in: /home/ubuntu/.npm/_logs/2025-12-06T20_32_24_070Z-debug-0.log
+npm error A complete log of this run can be found in: /home/ubuntu/.npm/_logs/2025-12-07T08_47_03_412Z-debug-0.log
