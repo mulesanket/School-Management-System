@@ -31,6 +31,7 @@ const ParentLoginPage: React.FC = () => {
 
       if (response.status === 200) {
         const data = await response.json();
+
         // store minimal info in localStorage for now
         localStorage.setItem(
           "parentUser",
@@ -40,7 +41,8 @@ const ParentLoginPage: React.FC = () => {
             email: data.email,
           })
         );
-        message.success("Login successful!");
+
+        message.success("Login successful");
         navigate("/parent/dashboard", { replace: true });
       } else if (response.status === 401) {
         const text = await response.text();
@@ -51,7 +53,7 @@ const ParentLoginPage: React.FC = () => {
       }
     } catch (err) {
       console.error("Login error:", err);
-      message.error("Unable to reach server. Please try again.");
+      message.error("Cannot reach server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -131,9 +133,7 @@ const ParentLoginPage: React.FC = () => {
           <Button
             type="link"
             style={{ padding: 0 }}
-            onClick={() =>
-              alert("Forgot password flow will be added later")
-            }
+            onClick={() => alert("Forgot password flow will be added later")}
           >
             Forgot password?
           </Button>
