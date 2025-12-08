@@ -1,4 +1,3 @@
-com/school/management/parentauth/parent/ParentAuthController.class
 com/school/management/parentauth/parent/ParentRegistrationRequest.class
 com/school/management/parentauth/auth/AuthController.class
 com/school/management/parentauth/ParentAuthServiceApplication.class

@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Card, Form, Input, Button, Typography, Select, message } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Typography,
+  Select,
+  message,
+} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
@@ -19,44 +27,45 @@ interface ParentRegisterFormValues {
 
 const ParentRegisterPage: React.FC = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm<ParentRegisterFormValues>();
   const [loading, setLoading] = useState(false);
 
   const handleFinish = async (values: ParentRegisterFormValues) => {
+    if (values.password !== values.confirmPassword) {
+      message.error("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
     try {
-      const payload = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
-        pupilName: values.pupilName,
-        relationship: values.relationship,
-        password: values.password,
-      };
-
       const response = await fetch(`${API_BASE_URL}/api/auth/parent/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          pupilName: values.pupilName,
+          relationship: values.relationship,
+          password: values.password,
+        }),
       });
 
       if (response.status === 201) {
-        message.success("Account created. You can now log in.");
+        message.success("Registration successful. Please login.");
         navigate("/parent/login", { replace: true });
-        return;
-      }
-
-      const text = await response.text();
-      if (response.status === 409) {
-        // email already taken (as we coded in backend)
+      } else if (response.status === 409) {
+        const text = await response.text();
         message.error(text || "Email is already registered.");
       } else {
+        const text = await response.text();
         message.error(text || "Registration failed. Please try again.");
       }
     } catch (err) {
-      console.error("Registration error", err);
-      message.error("Something went wrong. Please try again.");
+      console.error("Registration error:", err);
+      message.error("Cannot reach server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -87,7 +96,12 @@ const ParentRegisterPage: React.FC = () => {
           Create your parent account to connect with the school.
         </Text>
 
-        <Form layout="vertical" style={{ marginTop: 24 }} onFinish={handleFinish}>
+        <Form
+          layout="vertical"
+          style={{ marginTop: 24 }}
+          form={form}
+          onFinish={handleFinish}
+        >
           <Form.Item
             label="Full Name"
             name="name"
@@ -110,7 +124,9 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Mobile Number"
             name="phone"
-            rules={[{ required: true, message: "Please enter your mobile number" }]}
+            rules={[
+              { required: true, message: "Please enter your mobile number" },
+            ]}
           >
             <Input placeholder="+91-9876543210" />
           </Form.Item>
@@ -118,7 +134,9 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Pupil Name"
             name="pupilName"
-            rules={[{ required: true, message: "Please enter your child's name" }]}
+            rules={[
+              { required: true, message: "Please enter your child's name" },
+            ]}
           >
             <Input placeholder="Oliver Smith" />
           </Form.Item>
@@ -147,18 +165,7 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Confirm Password"
             name="confirmPassword"
-            dependencies={["password"]}
-            rules={[
-              { required: true, message: "Please confirm your password" },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error("Passwords do not match"));
-                },
-              }),
-            ]}
+            rules={[{ required: true, message: "Please confirm your password" }]}
           >
             <Input.Password placeholder="Re-enter password" />
           </Form.Item>
@@ -192,3 +199,4 @@ const ParentRegisterPage: React.FC = () => {
 };
 
 export default ParentRegisterPage;
+

@@ -16,6 +16,10 @@ public class ParentService {
 
     @Transactional
     public void registerParent(ParentRegistrationRequest request) {
+        if (request.getEmail() == null || request.getPassword() == null || request.getName() == null) {
+            throw new IllegalArgumentException("Missing required fields");
+        }
+
         // check if email already exists
         if (parentRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email is already registered");
@@ -30,7 +34,6 @@ public class ParentService {
         String passwordHash = passwordEncoder.encode(request.getPassword());
         parent.setPasswordHash(passwordHash);
 
-        // TODO: later link parent to pupil entity using pupilName + relationship
         parentRepository.save(parent);
     }
 }
