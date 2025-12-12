@@ -1,7 +1,7 @@
 package com.school.management.parentauth.parent;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "parents")
@@ -23,14 +23,21 @@ public class Parent {
     @Column(length = 20)
     private String phone;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "pupil_name", length = 255)
+    private String pupilName;
+
+    @Column(name = "relationship", length = 50)
+    private String relationship;
+
+    @Column(name = "created_at", nullable = false)
+    private OffsetDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private OffsetDateTime updatedAt;
 
-    public Parent() {
-    }
+    public Parent() {}
+
+    // getters & setters
 
     public Long getId() {
         return id;
@@ -42,7 +49,7 @@ public class Parent {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-        this.updatedAt = LocalDateTime.now();
+        touchUpdatedAt();
     }
 
     public String getEmail() {
@@ -51,7 +58,7 @@ public class Parent {
 
     public void setEmail(String email) {
         this.email = email;
-        this.updatedAt = LocalDateTime.now();
+        touchUpdatedAt();
     }
 
     public String getPasswordHash() {
@@ -60,7 +67,7 @@ public class Parent {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-        this.updatedAt = LocalDateTime.now();
+        touchUpdatedAt();
     }
 
     public String getPhone() {
@@ -69,14 +76,48 @@ public class Parent {
 
     public void setPhone(String phone) {
         this.phone = phone;
-        this.updatedAt = LocalDateTime.now();
+        touchUpdatedAt();
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getPupilName() {
+        return pupilName;
+    }
+
+    public void setPupilName(String pupilName) {
+        this.pupilName = pupilName;
+        touchUpdatedAt();
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+        touchUpdatedAt();
+    }
+
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    @PrePersist
+    public void onPrePersist() {
+        OffsetDateTime now = OffsetDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.updatedAt = OffsetDateTime.now();
+    }
+
+    private void touchUpdatedAt() {
+        this.updatedAt = OffsetDateTime.now();
     }
 }

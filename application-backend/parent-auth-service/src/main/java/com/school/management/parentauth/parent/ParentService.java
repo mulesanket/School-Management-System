@@ -30,6 +30,10 @@ public class ParentService {
         parent.setEmail(request.getEmail());
         parent.setPhone(request.getPhone());
 
+        // IMPORTANT: set pupilName and relationship (these were missing)
+        parent.setPupilName(request.getPupilName());
+        parent.setRelationship(request.getRelationship());
+
         // hash password
         String passwordHash = passwordEncoder.encode(request.getPassword());
         parent.setPasswordHash(passwordHash);
