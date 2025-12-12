@@ -5,6 +5,8 @@ import com.school.management.parentauth.parent.ParentRegistrationRequest;
 import com.school.management.parentauth.parent.ParentRepository;
 import com.school.management.parentauth.parent.ParentService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     private final ParentService parentService;
     private final ParentRepository parentRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -28,7 +32,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody ParentRegistrationRequest request) {
+    public ResponseEntity<?> register(@Valid @RequestBody ParentRegistrationRequest request) {
+        logger.info("Parent register request: email={}, name={}, pupilName={}, relationship={}",
+                request.getEmail(), request.getName(), request.getPupilName(), request.getRelationship());
+
         try {
             parentService.registerParent(request);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -36,7 +43,7 @@ public class AuthController {
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Registration failed", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
         }
     }

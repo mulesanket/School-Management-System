@@ -1,3 +1,4 @@
+-- Flyway migration: create parents table with pupil_name and relationship
 DROP TABLE IF EXISTS parents;
 
 CREATE TABLE parents (

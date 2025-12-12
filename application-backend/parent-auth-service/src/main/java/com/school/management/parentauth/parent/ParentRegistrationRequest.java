@@ -30,54 +30,23 @@ public class ParentRegistrationRequest {
     @Size(min = 8, max = 128)
     private String password;
 
-    public ParentRegistrationRequest() {
-    }
+    public ParentRegistrationRequest() {}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getPupilName() { return pupilName; }
+    public void setPupilName(String pupilName) { this.pupilName = pupilName; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getRelationship() { return relationship; }
+    public void setRelationship(String relationship) { this.relationship = relationship; }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPupilName() {
-        return pupilName;
-    }
-
-    public void setPupilName(String pupilName) {
-        this.pupilName = pupilName;
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }

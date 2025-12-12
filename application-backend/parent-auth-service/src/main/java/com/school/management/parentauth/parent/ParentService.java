@@ -20,7 +20,6 @@ public class ParentService {
             throw new IllegalArgumentException("Missing required fields");
         }
 
-        // check if email already exists
         if (parentRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email is already registered");
         }
@@ -29,12 +28,9 @@ public class ParentService {
         parent.setFullName(request.getName());
         parent.setEmail(request.getEmail());
         parent.setPhone(request.getPhone());
-
-        // IMPORTANT: set pupilName and relationship (these were missing)
         parent.setPupilName(request.getPupilName());
         parent.setRelationship(request.getRelationship());
 
-        // hash password
         String passwordHash = passwordEncoder.encode(request.getPassword());
         parent.setPasswordHash(passwordHash);
 

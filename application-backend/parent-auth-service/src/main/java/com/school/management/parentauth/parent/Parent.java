@@ -37,73 +37,28 @@ public class Parent {
 
     public Parent() {}
 
-    // getters & setters
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; touchUpdatedAt(); }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; touchUpdatedAt(); }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-        touchUpdatedAt();
-    }
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; touchUpdatedAt(); }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; touchUpdatedAt(); }
 
-    public void setEmail(String email) {
-        this.email = email;
-        touchUpdatedAt();
-    }
+    public String getPupilName() { return pupilName; }
+    public void setPupilName(String pupilName) { this.pupilName = pupilName; touchUpdatedAt(); }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+    public String getRelationship() { return relationship; }
+    public void setRelationship(String relationship) { this.relationship = relationship; touchUpdatedAt(); }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-        touchUpdatedAt();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-        touchUpdatedAt();
-    }
-
-    public String getPupilName() {
-        return pupilName;
-    }
-
-    public void setPupilName(String pupilName) {
-        this.pupilName = pupilName;
-        touchUpdatedAt();
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-        touchUpdatedAt();
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+    public OffsetDateTime getCreatedAt() { return createdAt; }
+    public OffsetDateTime getUpdatedAt() { return updatedAt; }
 
     @PrePersist
     public void onPrePersist() {
