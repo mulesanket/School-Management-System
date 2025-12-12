@@ -1,17 +1,17 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/parent_auth_db
+    url: jdbc:postgresql://school-management-system-db-cluster.cluster-c6v2ekk64hb4.us-east-1.rds.amazonaws.com:5432/parent_auth_db
     username: parent_auth_user
     password: parent_auth_pass
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: update   
     show-sql: false
 
   flyway:
-    enabled: false
+    enabled: false       
 
   main:
     banner-mode: "off"
