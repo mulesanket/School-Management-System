@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parent-auth-service
+  labels:
+    app: parent-auth-service
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parent-auth-service
+  template:
+    metadata:
+      labels:
+        app: parent-auth-service
+    spec:
+      containers:
+        - name: parent-auth-service
+          image: 566855233164.dkr.ecr.us-east-1.amazonaws.com/parent-auth-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: rds-config
+                  key: DATABASE_URL
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
