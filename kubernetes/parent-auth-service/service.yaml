@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: parent-auth-service
 spec:
+  type: ClusterIP
   selector:
     app: parent-auth-service
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 8081
-  type: ClusterIP
+      protocol: TCP
