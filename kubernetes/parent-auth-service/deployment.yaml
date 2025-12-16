@@ -24,7 +24,7 @@ spec:
           env:
             - name: DATABASE_URL
               valueFrom:
-                secretKeyRef:
+                 configMapKeyRef:
                   name: rds-config
                   key: DATABASE_URL
           resources:
