@@ -4,7 +4,6 @@ metadata:
   name: parent-auth-service
   labels:
     app: parent-auth-service
-
 spec:
   replicas: 1
   selector:
@@ -18,15 +17,43 @@ spec:
       containers:
         - name: parent-auth-service
           image: 566855233164.dkr.ecr.us-east-1.amazonaws.com/parent-auth-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always               # recommended for :latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8081            # make app listen on 8080 (see SERVER_PORT below)
           env:
-            - name: DATABASE_URL
+            # DB host/port/name from ConfigMap
+            - name: DB_HOST
               valueFrom:
-                 configMapKeyRef:
+                configMapKeyRef:
                   name: rds-config
-                  key: DATABASE_URL
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rds-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: rds-config
+                  key: DB_NAME
+            # Compose JDBC URL using env var expansion
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+            # Credentials from Secret
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+            # Align Spring server port with containerPort
+            - name: SERVER_PORT
+              value: "8080"
           resources:
             requests:
               memory: "256Mi"
