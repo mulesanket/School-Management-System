@@ -1,3 +1,4 @@
+// application-frontend/src/features/parents/ParentRegisterPage.tsx
 import React, { useState } from "react";
 import {
   Card,
@@ -31,11 +32,7 @@ const ParentRegisterPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleFinish = async (values: ParentRegisterFormValues) => {
-    if (values.password !== values.confirmPassword) {
-      message.error("Passwords do not match");
-      return;
-    }
-
+    // NOTE: frontend already enforces min length and equality; backend will also validate
     setLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/parent/register`, {
@@ -59,6 +56,22 @@ const ParentRegisterPage: React.FC = () => {
       } else if (response.status === 409) {
         const text = await response.text();
         message.error(text || "Email is already registered.");
+      } else if (response.status === 400) {
+        // Expecting JSON like { "field": "message" }
+        try {
+          const errors = await response.json();
+          if (errors && typeof errors === "object") {
+            // show first error message
+            const first = Object.values(errors)[0];
+            message.error(String(first) || "Validation failed");
+          } else {
+            const text = await response.text();
+            message.error(text || "Validation failed");
+          }
+        } catch (e) {
+          const text = await response.text();
+          message.error(text || "Validation failed");
+        }
       } else {
         const text = await response.text();
         message.error(text || "Registration failed. Please try again.");
@@ -154,10 +167,15 @@ const ParentRegisterPage: React.FC = () => {
             </Select>
           </Form.Item>
 
+          {/* Password: enforce min length on frontend */}
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: "Please enter a password" }]}
+            rules={[
+              { required: true, message: "Please enter a password" },
+              { min: 8, message: "Password must be at least 8 characters" },
+            ]}
+            hasFeedback
           >
             <Input.Password placeholder="Create a password" />
           </Form.Item>
@@ -165,7 +183,19 @@ const ParentRegisterPage: React.FC = () => {
           <Form.Item
             label="Confirm Password"
             name="confirmPassword"
-            rules={[{ required: true, message: "Please confirm your password" }]}
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              { required: true, message: "Please confirm your password" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Passwords do not match'));
+                },
+              }),
+            ]}
           >
             <Input.Password placeholder="Re-enter password" />
           </Form.Item>
@@ -199,4 +229,3 @@ const ParentRegisterPage: React.FC = () => {
 };
 
 export default ParentRegisterPage;
-
