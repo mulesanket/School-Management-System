@@ -23,31 +23,31 @@ spec:
           ports:
             - containerPort: 8081
 
-          startupProbe:
-            httpGet:
-              path: /health/startup
-              port: 8081
-            periodSeconds: 10
-            failureThreshold: 30
-            timeoutSeconds: 2
+          # startupProbe:
+          #   httpGet:
+          #     path: /health/startup
+          #     port: 8081
+          #   periodSeconds: 10
+          #   failureThreshold: 30
+          #   timeoutSeconds: 2
 
-          readinessProbe:
-            httpGet:
-              path: /health/ready
-              port: 8081
-            periodSeconds: 10
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health/ready
+          #     port: 8081
+          #   periodSeconds: 10
+          #   initialDelaySeconds: 10
+          #   timeoutSeconds: 2
+          #   failureThreshold: 3
 
-          livenessProbe:
-            httpGet:
-              path: /health/live
-              port: 8081
-            periodSeconds: 15
-            initialDelaySeconds: 30
-            timeoutSeconds: 2
-            failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health/live
+          #     port: 8081
+          #   periodSeconds: 15
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 2
+          #   failureThreshold: 3
 
           resources:
             requests:
