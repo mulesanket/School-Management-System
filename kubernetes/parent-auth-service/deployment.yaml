@@ -4,11 +4,13 @@ metadata:
   name: parent-auth-service
   labels:
     app: parent-auth-service
+
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: parent-auth-service
+      
   template:
     metadata:
       labels:
@@ -20,27 +22,32 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
-          env:
-            - name: SPRING_DATASOURCE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: rds-config
-                  key: SPRING_DATASOURCE_URL
 
-            - name: SPRING_DATASOURCE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: SPRING_DATASOURCE_USERNAME
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8081
+            periodSeconds: 10
+            failureThreshold: 30
+            timeoutSeconds: 2
 
-            - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: SPRING_DATASOURCE_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8081
+            periodSeconds: 10
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
 
-            - name: SERVER_PORT
-              value: "8081"
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8081
+            periodSeconds: 15
+            initialDelaySeconds: 30
+            timeoutSeconds: 2
+            failureThreshold: 3
 
           resources:
             requests:
@@ -49,5 +56,3 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
-
-          

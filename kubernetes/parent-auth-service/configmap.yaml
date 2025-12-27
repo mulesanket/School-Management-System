@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: rds-config
-data:
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://school-management-system-db-cluster.cluster-c6v2ekk64hb4.us-east-1.rds.amazonaws.com:5432/parent_auth_db"
