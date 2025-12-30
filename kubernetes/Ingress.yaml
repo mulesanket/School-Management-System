@@ -1,41 +1,29 @@
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: parent-auth-ingress
-    namespace: default
-    annotations:
-      # ensure only AWS ALB controller handles this Ingress
-      kubernetes.io/ingress.class: alb
-      # specify the subnets for the ALB
-      alb.ingress.kubernetes.io/subnets: subnet-0a6611443981d9d84,subnet-0cf4fbc5e6dd501e9
-      # ALB must be publicly reachable
-      alb.ingress.kubernetes.io/scheme: internet-facing
-
-      # register pod IPs (recommended for EKS with AWS CNI / required for Fargate)
-      alb.ingress.kubernetes.io/target-type: ip
-
-      # listeners: HTTP on 80 and HTTPS on 443
-      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
-
-      # USE YOUR ISSUED ACM CERT ARN (this one is from your output)
-      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:566855233164:certificate/d2e2097e-b1cf-4a0e-8071-0605b70d8afa
-
-      # health-check settings (must match your readiness endpoint & container port)
-      alb.ingress.kubernetes.io/healthcheck-path: /health/ready
-      alb.ingress.kubernetes.io/healthcheck-port: "8081"
-      alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-      alb.ingress.kubernetes.io/success-codes: "200,204"
-
-  spec:
-    rules:
-      - host: api.sanketmuledevops.solutions
-        http:
-          paths:
-            - path: /auth
-              pathType: Prefix
-              backend:
-                service:
-                  name: parent-auth-service
-                  port:
-                    # must match the 'name' field under the Service ports
-                    name: http
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: parent-auth-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/subnets: subnet-0a6611443981d9d84,subnet-0cf4fbc5e6dd501e9
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:566855233164:certificate/d2e2097e-b1cf-4a0e-8071-0605b70d8afa
+    alb.ingress.kubernetes.io/healthcheck-path: /health/ready
+    alb.ingress.kubernetes.io/healthcheck-port: "8081"
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/success-codes: "200,204"
+spec:
+  ingressClassName: alb
+  rules:
+    - host: api.sanketmuledevops.solutions
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: parent-auth-service
+                port:
+                  name: http

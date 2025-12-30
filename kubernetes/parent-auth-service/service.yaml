@@ -2,11 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: parent-auth-service
+  namespace: default
 spec:
   type: ClusterIP
   selector:
     app: parent-auth-service
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8081
       protocol: TCP
