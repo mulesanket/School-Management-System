@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || "";
 
-export default function ParentLoginPage(): JSX.Element {
+export default function ParentLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
