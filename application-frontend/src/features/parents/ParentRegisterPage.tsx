@@ -35,7 +35,7 @@ const ParentRegisterPage: React.FC = () => {
     // NOTE: frontend already enforces min length and equality; backend will also validate
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/parent/register`, {
+      const response = await fetch(`${API_BASE_URL}/auth/parent/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

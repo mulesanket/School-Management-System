@@ -18,7 +18,7 @@ const ParentLoginPage: React.FC = () => {
   const handleFinish = async (values: ParentLoginFormValues) => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/parent/login`, {
+      const response = await fetch(`${API_BASE_URL}/auth/parent/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,4 +144,3 @@ const ParentLoginPage: React.FC = () => {
 };
 
 export default ParentLoginPage;
-
