@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || "";
 
-export default function ParentRegisterPage() {
+export default function ParentRegisterPage(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -17,6 +17,7 @@ export default function ParentRegisterPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
+
     try {
       const res = await fetch(`${API_BASE}/auth/parent/register`, {
         method: "POST",
@@ -33,15 +34,19 @@ export default function ParentRegisterPage() {
 
       const text = await res.text();
       let data: any = null;
-      try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch {
+        data = text;
+      }
 
       if (!res.ok) {
         const msg = (data && data.message) ? data.message : text || res.statusText;
         throw new Error(msg);
       }
 
-      // registration successful -> go to login
-      alert("Registration successful. Please login.");
+      // registration success -> redirect to login
+      window.alert("Registration successful. Please login.");
       window.location.href = "/parent/login";
     } catch (err: any) {
       setError(err?.message || "Registration failed");
@@ -51,47 +56,47 @@ export default function ParentRegisterPage() {
   }
 
   return (
-    <main style={{ maxWidth: 640, margin: "40px auto", padding: 12 }}>
+    <div>
       <h2>Parent Register</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Full name</label>
           <input required value={name} onChange={(e) => setName(e.target.value)} />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Email</label>
           <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Phone</label>
           <input value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Pupil name</label>
           <input value={pupilName} onChange={(e) => setPupilName(e.target.value)} />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Relationship</label>
           <input value={relationship} onChange={(e) => setRelationship(e.target.value)} />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
+        <div>
           <label>Password</label>
           <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
 
         <div>
           <button type="submit" disabled={loading}>
-            {loading ? "Registering…" : "Register"}
+            {loading ? "Registering..." : "Register"}
           </button>
         </div>
 
-        {error && <div style={{ marginTop: 12, color: "crimson" }}>{error}</div>}
+        {error && <div style={{ color: "crimson", marginTop: 8 }}>{error}</div>}
       </form>
-    </main>
+    </div>
   );
 }
