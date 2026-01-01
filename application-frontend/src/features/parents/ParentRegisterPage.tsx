@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || "";
 
-export default function ParentRegisterPage() {
+export default function ParentRegisterPage(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
