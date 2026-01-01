@@ -4,7 +4,6 @@ metadata:
   name: parent-auth-ingress
   namespace: default
   annotations:
-    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/subnets: subnet-0a6611443981d9d84,subnet-0cf4fbc5e6dd501e9
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
